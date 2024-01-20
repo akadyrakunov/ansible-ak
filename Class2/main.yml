@@ -1,0 +1,55 @@
+- hosts: all
+  tasks: 
+  - name: install the latest version of Git
+    yum:
+      name: git
+      state: latest
+    notify: restart httpd
+  - name: install unzip
+    yum:
+      name: unzip
+      state: present
+    notify: install tree
+  
+  handlers: 
+  - name: restart httpd #the name has to be UNIQUE of the handler
+    service:
+      name: httpd
+      state: restarted
+  - name: install wget
+    yum:
+      name: wget
+      state: present
+  - name: install tree
+    yum:
+      name: tree
+      state: present
+
+  
+
+
+
+
+
+  # - name: install the latest version of GIT
+  #   yum:
+  #     name: git
+  #     state: latest  
+  # - name: Start service httpd, if not started
+  #   service:
+  #     name: httpd
+  #     state: started
+  # - name: Enable service httpd, and not touch the state
+  #   service:
+  #     name: httpd
+  #     enabled: yes
+  # - name: Stop service httpd, if started
+  #   service:
+  #     name: httpd
+  #     state: stopped
+
+
+  # - name: REMOVE the latest version of GIT
+  #   yum:
+  #     name: git
+  #     state: absent  

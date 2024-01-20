@@ -1,0 +1,13 @@
+- hosts: all
+  tasks:
+  - name: Install packages
+    yum:
+      name: "{{ packages }}"
+      state: present   # if you fo not provide the state, it will alwayt be executed present
+    vars: 
+      packages:
+      - wget
+      - git
+      - httpd
+      - tree
+      - unzip

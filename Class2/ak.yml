@@ -1,0 +1,17 @@
+- hosts: all
+  tasks: 
+  # we have build in variables, you can call by env command
+  - debug:
+      msg: "OS is: {{ ansible_distribution }}"  # to apply all hosts, we run command>>> ansible-playbook ak.yml -i hosts
+
+  - name: Install Apache
+    include_tasks: "{{ ansible_distribution }}.yml"
+
+
+# - hosts: all
+#   tasks:
+#   - debug:
+#       msg: "OS is: {{ ansible_distribution }}"
+
+#   - name: Install Apache
+#     include_tasks: "{{ ansible_distribution }}.yml"
