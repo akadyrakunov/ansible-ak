@@ -1,0 +1,36 @@
+- name: Download foo.conf
+  get_url:
+    url: "{{ url }}"
+    dest: "{{ destination }}"
+
+- name: Extract Wordpress
+  unarchive:
+    src: /tmp/wordpress.tar.gz    # source of ansible if there is no remote_src: yes
+    dest: /tmp                    # destination of remote machine
+    remote_src: yes
+
+- name: Copy file with owner and permissions
+  copy:
+    src: /tmp/wordpress/.
+    dest: /var/www/html/
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: '775'
+    remote_src: yes
+
+- name: Start service httpd, if not started
+  service:
+    name: httpd
+    state: restarted
+
+
+
+
+
+
+# wget https://wordpress.org/latest.tar.gz
+# tar -xf latest.tar.gz -C /var/www/html/
+# mv /var/www/html/wordpress/* /var/www/html/
+# getenforce
+# setenforce 0
+# chown -R apache:apache /var/www/html/
