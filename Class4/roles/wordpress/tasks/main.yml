@@ -18,6 +18,11 @@
     mode: '775'
     remote_src: yes
 
+- name: Template a file to /var/www/html
+  template:
+    src: wp-config.php.j2
+    dest: /var/www/html/wp-config.php
+
 - name: Start service httpd, if not started
   service:
     name: httpd
