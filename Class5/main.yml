@@ -1,0 +1,28 @@
+- hosts: all
+  become: yes
+  tasks:
+  - hostname: 
+      name: "{{ inventory_hostname }}"
+  - debug: 
+      msg: "{{ ansible_distribution }}"
+
+  - name: Install Apache
+    include_tasks: "{{ ansible_distribution }}.yml"
+
+
+# - hosts: worker
+#   tasks:
+#   - hostname: 
+#       name: akylbek
+
+# - hosts: worker2
+#   become: yes
+#   tasks:
+#   - hostname: 
+#       name: aws1
+
+# - hosts: worker3
+#   become: yes
+#   tasks:
+#   - hostname: 
+#       name: aws2
